@@ -94,7 +94,7 @@ vec3 CalcAllLightContribution(vec3 worldPos, vec3 normal, vec3 camPos, float shi
 
 	// Direction between camera and fragment will be shared for all lights
 	vec3 viewDir  = normalize(camPos - worldPos);
-	
+	 
 	// Iterate over all lights
 	for(int ix = 0; ix < AmbientColAndNumLights.w && ix < MAX_LIGHTS; ix++) {
 		// Additive lighting model

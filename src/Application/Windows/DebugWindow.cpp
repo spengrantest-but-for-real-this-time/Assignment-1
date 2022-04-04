@@ -32,6 +32,7 @@ void DebugWindow::RenderMenuBar()
 	bool tempSpec = *(flags & RenderFlags::EnableSpecular);
 	bool tempAmb = *(flags & RenderFlags::EnableAmbient);
 	bool tempDiff = *(flags & RenderFlags::EnableDiffuse);
+	bool tempToon= *(flags & RenderFlags::EnableToon);
 	if (ImGui::Checkbox("Enable Color Correction", &temp)) {
 		changed = true;
 		flags = (flags & ~*RenderFlags::EnableColorCorrection) | (temp ? RenderFlags::EnableColorCorrection : RenderFlags::None);
@@ -50,6 +51,11 @@ void DebugWindow::RenderMenuBar()
 	if (ImGui::Checkbox("Enable Diffuse Shader", &tempDiff)) {
 		changed = true;
 		flags = (flags & ~*RenderFlags::EnableDiffuse) | (tempDiff ? RenderFlags::EnableDiffuse: RenderFlags::None);
+	}
+
+	if (ImGui::Checkbox("Enable Toon Shader", &tempToon)) {
+		changed = true;
+		flags = (flags & ~*RenderFlags::EnableToon) | (tempToon ? RenderFlags::EnableToon: RenderFlags::None);
 	}
 
 	if (changed) {

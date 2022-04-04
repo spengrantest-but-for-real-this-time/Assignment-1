@@ -155,7 +155,7 @@ void DefaultSceneLayer::_CreateScene()
 			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
 			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_tangentspace_normal_maps.glsl" }
 		});
-		tangentSpaceMapping->SetDebugName("Tangent Space Mapping");
+		tangentSpaceMapping->SetDebugName("Tangent Space Mapping"); 
 
 		// This shader handles our multitexturing example
 		ShaderProgram::Sptr multiTextureShader = ResourceManager::CreateAsset<ShaderProgram>(std::unordered_map<ShaderPartType, std::string>{
@@ -213,9 +213,11 @@ void DefaultSceneLayer::_CreateScene()
 
 
 		// Configure the color correction LUT
-		scene->SetColorLUT(custom);
+		scene->SetColorLUT(cool);
 
-		
+		scene->SetColorLUT2(warm);
+
+		scene->SetColorLUT3(custom);
 
 
 		// Create our materials
@@ -224,6 +226,7 @@ void DefaultSceneLayer::_CreateScene()
 		{
 			boxMaterial->Name = "Box";
 			boxMaterial->Set("u_Material.Diffuse", boxTexture);
+			boxMaterial->Set("s_ToonTerm", toonLut);
 			boxMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 
@@ -232,6 +235,7 @@ void DefaultSceneLayer::_CreateScene()
 		{
 			fireMaterial->Name = "Campfire";
 			fireMaterial->Set("u_Material.Diffuse", campfireTex);
+			fireMaterial->Set("s_ToonTerm", toonLut);
 			fireMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 	
@@ -240,6 +244,7 @@ void DefaultSceneLayer::_CreateScene()
 		{
 			stoolMaterial->Name = "Stool";
 			stoolMaterial->Set("u_Material.Diffuse", stoolTex);
+			stoolMaterial->Set("s_ToonTerm", toonLut);
 			stoolMaterial->Set("u_Material.Shininess", 0.1f);
 		}
 
@@ -265,6 +270,7 @@ void DefaultSceneLayer::_CreateScene()
 		{
 			balloonMaterial->Name = "Balloon_Mat";
 			balloonMaterial->Set("u_Material.Diffuse", balloonTex);
+			balloonMaterial->Set("s_ToonTerm", toonLut);
 			balloonMaterial->Set("u_Material.Specular", balloonTex);
 		}
 
@@ -333,9 +339,9 @@ void DefaultSceneLayer::_CreateScene()
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
-		scene->Lights[0].Position = glm::vec3(0.0f, 0.0f, 2.0f);
-		scene->Lights[0].Color = glm::vec3(1.0f, 0.0f, 0.0f);
-		scene->Lights[0].Range = 300.0f;
+		scene->Lights[0].Position = glm::vec3(0.0f, 0.0f, 5.0f);
+		scene->Lights[0].Color = glm::vec3(1.0f, 0.8f, 0.8f);
+		scene->Lights[0].Range = 500.0f;
 
 
 

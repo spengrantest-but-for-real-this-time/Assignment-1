@@ -177,7 +177,7 @@ void Application::_Run()
 	_Load();
 
 	// Grab current time as the previous frame
-	double lastFrame =  glfwGetTime();
+	double lastFrame =  glfwGetTime(); 
 
 	// Done loading, app is now running!
 	_isRunning = true;
@@ -322,7 +322,7 @@ void Application::_PreRender()
 			layer->OnPreRender();
 		}
 	}
-}
+}   
 
 void Application::_RenderScene() {
 
@@ -337,7 +337,7 @@ void Application::_RenderScene() {
 	_renderOutput = result;
 
 }
-
+                       
 void Application::_PostRender() {
 	// Note that we use a reverse iterator for post render
 	for (auto it = _layers.crbegin(); it != _layers.crend(); it++) {
@@ -368,18 +368,18 @@ void Application::_PostRender() {
 		_renderOutput->Bind(FramebufferBinding::Read);
 		glBindFramebuffer(*FramebufferBinding::Write, 0);
 		Framebuffer::Blit({ 0, 0, _renderOutput->GetWidth(), _renderOutput->GetHeight() }, viewportMinMax, BufferFlags::All, MagFilter::Nearest);
-	}
+	}  
 }
-
+           
 void Application::_Unload() {
 	// Note that we use a reverse iterator for unloading
-	for (auto it = _layers.crbegin(); it != _layers.crend(); it++) {
+	for (auto it = _layers.crbegin(); it != _layers.crend(); it++) {     
 		const auto& layer = *it;
 		if (layer->Enabled && *(layer->Overrides & AppLayerFunctions::OnAppUnload)) {
 			layer->OnAppUnload();
 		}
 	}
-
+	      
 	// Clean up ImGui
 	ImGuiHelper::Cleanup();
 }
@@ -393,7 +393,7 @@ void Application::_HandleSceneChange() {
 			if (layer->Enabled && *(layer->Overrides & AppLayerFunctions::OnSceneUnload)) {
 				layer->OnSceneUnload();
 			}
-		}
+		}  
 	}
 
 	_currentScene = _targetScene;
